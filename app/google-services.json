@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "633124352807",
+    "project_id": "solarsync-e9f5d",
+    "storage_bucket": "solarsync-e9f5d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633124352807:android:9dc36b037261dd9e616f02",
+        "android_client_info": {
+          "package_name": "com.solarsync.solarapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPDNvPmMTg50LrP0JjgkYkYGqRGFTROuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
