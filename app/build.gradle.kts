@@ -55,11 +55,12 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android.v247)
-    implementation("com.google.dagger:hilt-compiler:2.37") //era pra ser o kapt
+    kapt("com.google.dagger:hilt-compiler:2.37")
 
     // Para ViewModel (se necessário)
     implementation(libs.androidx.hilt.lifecycle.viewmodel)
-    implementation("androidx.hilt:hilt-compiler:1.0.0") //Era pra ser o kapt
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -95,6 +96,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.foundation.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
