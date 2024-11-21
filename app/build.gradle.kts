@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-//    id("com.android.application")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
 }
 
@@ -43,16 +44,31 @@ android {
 
 dependencies {
 dependencies {
+    // Compose
     implementation(libs.ui)
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Navigation
     implementation(libs.androidx.navigation.compose)
+
+    // Hilt
+    implementation(libs.hilt.android.v247)
+    implementation("com.google.dagger:hilt-compiler:2.37") //era pra ser o kapt
+
+    // Para ViewModel (se necessário)
+    implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    implementation("androidx.hilt:hilt-compiler:1.0.0") //Era pra ser o kapt
 
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.play.services)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
