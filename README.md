@@ -14,7 +14,9 @@ SolarSync é uma plataforma intermediadora que conecta clientes e fornecedores c
 
 A missão do SolarSync é democratizar o acesso à energia solar, ajudando empresas e residências a adotar fontes de energia renováveis, reduzindo a emissão de carbono e promovendo a sustentabilidade.
 
-🌐 Tecnologias utilizadas:
+
+<h2>🌐 Tecnologias utilizadas:</h2>
+
 - Kotlin com Jetpack Compose
 - Autenticação e Banco de Dados: Firebase Authentication e Firestore
 
@@ -44,6 +46,7 @@ A missão do SolarSync é democratizar o acesso à energia solar, ajudando empre
 
 <h2>📱 Como Executar</h2>
 <h3>Pré-requisitos</h3>
+
 1. Clone o repositório: 
 
 ```bash
