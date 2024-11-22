@@ -3,46 +3,33 @@ package com.solarsync.solarapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.solarsync.solarapp.ui.screens.auth.LoginScreen
+import com.solarsync.solarapp.ui.screens.client.ClientRegisterScreen
+import com.solarsync.solarapp.ui.screens.profile.ProfileScreen
+import com.solarsync.solarapp.ui.screens.supplier.SupplierRegisterScreen
+import com.solarsync.solarapp.ui.screens.welcome.WelcomeScreen
 import com.solarsync.solarapp.ui.theme.SolarAppTheme
-import com.solarsync.solarapp.ui.screens.auth.ClientMultiStepForm
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.solarsync.solarapp.ui.components.MultiStepForm
+
 
 class MainActivity : ComponentActivity() {
-    private val firebaseAuth = FirebaseAuth.getInstance()
-    private val firestore = FirebaseFirestore.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             SolarAppTheme {
-                val navController = rememberNavController()
-
-                NavHost(navController = navController, startDestination = "clientRegistration") {
-//                    composable("home") {
-//                        HomeScreen()
-//                    }
-                    composable("clientRegistration") {
-                        ClientMultiStepForm()
-                    }
+                NavHost(navController = navController, startDestination = Screen.Welcome.route) {
+                    composable(Screen.Welcome.route) { WelcomeScreen(navController) }
+                    composable(Screen.ClientRegister.route) { ClientRegisterScreen(navController) }
+                    composable(Screen.SupplierRegister.route) { SupplierRegisterScreen(navController) }
+                    composable(Screen.Login.route) { LoginScreen(navController) }
+                    //composable(Screen.Dashboard.route) { DashboardScreen() }
+                    composable(Screen.Profile.route) { ProfileScreen() }
                 }
             }
-
         }
-
     }
 }
 
@@ -54,10 +41,10 @@ class MainActivity : ComponentActivity() {
 //    )
 //}
 
-@Preview(showBackground = true)
-@Composable
-fun RegistroPreview() {
-    SolarAppTheme {
-        ClientMultiStepForm()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun RegistroPreview() {
+//    SolarAppTheme {
+//        ClientMultiStepForm()
+//    }
+//}
