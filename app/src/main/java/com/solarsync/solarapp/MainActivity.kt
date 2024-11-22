@@ -58,19 +58,3 @@ private fun isUserLoggedIn(): Boolean {
     val currentUser = FirebaseAuth.getInstance().currentUser
     return currentUser != null
 }
-
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun RegistroPreview() {
-//    SolarAppTheme {
-//        ClientMultiStepForm()
-//    }
-//}
