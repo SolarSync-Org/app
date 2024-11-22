@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.solarsync.solarapp.ui.components.SolarSyncButton
 
 @Composable
 fun ProfileScreen(
@@ -207,16 +208,15 @@ fun ProfileScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 // Logout Button
-                Button(
+                SolarSyncButton(
+                    text = "Sair",
                     onClick = {
                         viewModel.signOut(onComplete ={
                             onSignOut()
                         })
                     },
                     modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Sair")
-                }
+                )
             }
         }
     }

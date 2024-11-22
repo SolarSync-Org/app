@@ -41,7 +41,7 @@ fun WelcomeScreen(navController: NavController) {
                 .size(400.dp)
         )
 
-        Spacer(modifier = Modifier.height(36.dp))
+        Spacer(modifier = Modifier.height(22.dp))
 
         // Título principal
         Text(
@@ -77,7 +77,7 @@ fun WelcomeScreen(navController: NavController) {
             }// Deixa o botão com espaçamento nas laterais
         )
 
-        Spacer(modifier = Modifier.height(8.dp)) // Espaço entre o botão de login e os botões de registro
+        Spacer(modifier = Modifier.height(16.dp)) // Espaço entre o botão de login e os botões de registro
 
         // Botões de registro
         Row(
