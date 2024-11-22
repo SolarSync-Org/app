@@ -22,11 +22,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.solarsync.solarapp.Screen
 import com.solarsync.solarapp.ui.components.SolarSyncButton
 import com.solarsync.solarapp.ui.components.SolarSyncTextField
-import com.solarsync.solarapp.Screen
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun SupplierRegisterScreen(
@@ -37,11 +37,13 @@ fun SupplierRegisterScreen(
     val formData by viewModel.formData
     val context = LocalContext.current
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LinearProgressIndicator(
                 progress = (currentStep + 1) / 4f,
@@ -248,6 +250,7 @@ fun SupplierBasicInfoStep(
 
         SolarSyncTextField(
             value = password,
+            isPassword = true,
             onValueChange = { password = it },
             label = "Senha",
             visualTransformation = PasswordVisualTransformation()

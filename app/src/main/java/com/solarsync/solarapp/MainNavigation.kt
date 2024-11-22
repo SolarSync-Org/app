@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -30,9 +31,10 @@ fun MainBottomNavigation(navController: NavController) {
         val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, "Dashboard") },
-            label = { Text("Dashboard") },
+            icon = { Icon(Icons.Default.Home, "Dashboard", tint = MaterialTheme.colorScheme.primary)},
+            label = { Text("Dashboard", color = MaterialTheme.colorScheme.primary) },
             selected = currentRoute == MainScreen.Dashboard.route,
+
             onClick = {
                 navController.navigate(MainScreen.Dashboard.route) {
                     popUpTo(navController.graph.startDestinationId)
@@ -42,8 +44,8 @@ fun MainBottomNavigation(navController: NavController) {
         )
 
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Person, "Profile") },
-            label = { Text("Profile") },
+            icon = { Icon(Icons.Default.Person, "Profile", tint = MaterialTheme.colorScheme.primary) },
+            label = { Text("Profile", color = MaterialTheme.colorScheme.primary ) },
             selected = currentRoute == MainScreen.Profile.route,
             onClick = {
                 navController.navigate(MainScreen.Profile.route) {

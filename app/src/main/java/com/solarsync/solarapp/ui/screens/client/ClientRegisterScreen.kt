@@ -37,11 +37,13 @@ fun ClientRegisterScreen(
     val formData by viewModel.formData
     val context = LocalContext.current
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Progress Indicator
             LinearProgressIndicator(
@@ -277,6 +279,7 @@ fun BasicInfoStep(
 
         SolarSyncTextField(
             value = password,
+            isPassword = true,
             onValueChange = { password = it },
             label = "Senha",
             visualTransformation = PasswordVisualTransformation()

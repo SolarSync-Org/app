@@ -59,6 +59,7 @@ fun LoginScreen(
 
             SolarSyncTextField(
                 value = password,
+                isPassword = true,
                 onValueChange = viewModel::updatePassword,
                 label = "Senha",
                 visualTransformation = PasswordVisualTransformation()
