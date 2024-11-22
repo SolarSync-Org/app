@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
@@ -41,10 +42,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 
 @Composable
 fun ProfileScreen(
-    viewModel: ProfileViewModel = viewModel()
+    navController: NavController,
+    viewModel: ProfileViewModel = viewModel(),
+    onSignOut: () -> Unit
 ) {
     val userData by viewModel.userData.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -106,14 +110,14 @@ fun ProfileScreen(
                     ProfileInfoItem(
                         icon = Icons.Default.LocationOn,
                         label = "Localização",
-                        value = data["location"] as? String ?: ""
+                        value = data["city"] as? String ?: ""
                     )
                 } else {
                     // Supplier specific info
                     ProfileInfoItem(
                         icon = Icons.Default.Build,
                         label = "Soluções Disponíveis",
-                        value = data["availableSolutions"] as? String ?: ""
+                        value = data["solutionType"] as? String ?: ""
                     )
                     ProfileInfoItem(
                         icon = Icons.Default.Place,
@@ -140,11 +144,21 @@ fun ProfileScreen(
                                 style = MaterialTheme.typography.titleMedium
                             )
                             if (!isEditingAboutMe) {
-                                IconButton(onClick = {
-                                    isEditingAboutMe = true
-                                    editedAboutMe = aboutMe
-                                }) {
-                                    Icon(Icons.Default.Edit, "Editar")
+                                Row {
+                                    IconButton(onClick = {
+                                        isEditingAboutMe = true
+                                        editedAboutMe = aboutMe
+                                    }) {
+                                        Icon(Icons.Default.Edit, "Editar")
+                                    }
+                                    IconButton(onClick = {
+                                        viewModel.deleteAboutMe(
+                                            onSuccess = { /* Pode adicionar um Toast aqui se quiser */ },
+                                            onError = { /* Handle error */ }
+                                        )
+                                    }) {
+                                        Icon(Icons.Default.Delete, "Excluir")
+                                    }
                                 }
                             }
                         }
@@ -194,7 +208,11 @@ fun ProfileScreen(
 
                 // Logout Button
                 Button(
-                    onClick = { viewModel.signOut { /* Navigate to Welcome Screen */ } },
+                    onClick = {
+                        viewModel.signOut(onComplete ={
+                            onSignOut()
+                        })
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Sair")

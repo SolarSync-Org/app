@@ -3,7 +3,9 @@ package com.solarsync.solarapp.ui.screens.auth
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
     private val _email = mutableStateOf("")
@@ -23,21 +25,23 @@ class LoginViewModel : ViewModel() {
         _password.value = value
     }
 
-    fun login(
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
-        _isLoading.value = true
-        val auth = FirebaseAuth.getInstance()
-
-        auth.signInWithEmailAndPassword(email.value, password.value)
-            .addOnSuccessListener {
+    fun login(onSuccess: () -> Unit, onError: (String) -> Unit) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email.value, password.value)
+                    .addOnSuccessListener {
+                        _isLoading.value = false
+                        onSuccess()
+                    }
+                    .addOnFailureListener { exception ->
+                        _isLoading.value = false
+                        onError(exception.localizedMessage ?: "Erro ao fazer login")
+                    }
+            } catch (e: Exception) {
                 _isLoading.value = false
-                onSuccess()
+                onError(e.localizedMessage ?: "Erro ao fazer login")
             }
-            .addOnFailureListener {
-                _isLoading.value = false
-                onError(it.message ?: "Erro ao fazer login")
-            }
+        }
     }
 }

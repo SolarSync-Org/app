@@ -19,14 +19,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.solarsync.solarapp.Screen
 import com.solarsync.solarapp.ui.components.SolarSyncButton
 import com.solarsync.solarapp.ui.components.SolarSyncTextField
 
 @Composable
 fun LoginScreen(
     navController: NavController,
-    viewModel: LoginViewModel = viewModel()
+    viewModel: LoginViewModel = viewModel(),
+    onLoginSuccess: () -> Unit
 ) {
     val email by viewModel.email
     val password by viewModel.password
@@ -72,9 +72,7 @@ fun LoginScreen(
                     onClick = {
                         viewModel.login(
                             onSuccess = {
-                                navController.navigate(Screen.Profile.route) {
-                                    popUpTo(Screen.Login.route) { inclusive = true }
-                                }
+                                onLoginSuccess()
                             },
                             onError = { error ->
                                 Toast.makeText(context, error, Toast.LENGTH_LONG).show()

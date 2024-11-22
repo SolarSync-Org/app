@@ -31,12 +31,12 @@ fun WelcomeScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         SolarSyncButton(
-            text = "Cliente",
+            text = "Registrar cliente",
             onClick = { navController.navigate(Screen.ClientRegister.route) }
         )
         Spacer(modifier = Modifier.height(16.dp))
         SolarSyncButton(
-            text = "Fornecedor",
+            text = "Registrar fornecedor",
             onClick = { navController.navigate(Screen.SupplierRegister.route) }
         )
     }

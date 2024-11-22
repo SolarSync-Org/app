@@ -35,11 +35,13 @@ class ProfileViewModel : ViewModel() {
                 .addOnSuccessListener { document ->
                     if (document.exists()) {
                         _userData.value = document.data
+                        _aboutMe.value = document.getString("aboutMe") ?: ""
                     } else {
                         // If not found in clients, check suppliers
                         db.collection("suppliers").document(userId).get()
                             .addOnSuccessListener { supplierDoc ->
                                 _userData.value = supplierDoc.data
+                                _aboutMe.value = supplierDoc.getString("aboutMe") ?: ""
                             }
                     }
                     _isLoading.value = false
@@ -69,6 +71,29 @@ class ProfileViewModel : ViewModel() {
                     }
                     .addOnFailureListener {
                         onError(exception.message ?: "Erro ao atualizar")
+                    }
+            }
+    }
+
+    fun deleteAboutMe(onSuccess: () -> Unit, onError: (String) -> Unit) {
+        val auth = FirebaseAuth.getInstance()
+        val db = FirebaseFirestore.getInstance()
+        val userId = auth.currentUser?.uid ?: return
+
+        db.collection("clients").document(userId).update("aboutMe", "")
+            .addOnSuccessListener {
+                _aboutMe.value = ""
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                // If not found in clients, try suppliers
+                db.collection("suppliers").document(userId).update("aboutMe", "")
+                    .addOnSuccessListener {
+                        _aboutMe.value = ""
+                        onSuccess()
+                    }
+                    .addOnFailureListener {
+                        onError(exception.message ?: "Erro ao deletar")
                     }
             }
     }
